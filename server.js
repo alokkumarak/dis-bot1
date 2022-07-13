@@ -59,7 +59,7 @@ async function messageReply(msg){
        msg.reply(jsonData.data[index].url);
      }
      else if(term[0]==`hello bot`){
-         msg.reply(`hello my friend @${msg.author.username}`);
+         msg.reply(`hello friend @${msg.author.username}`);
      }
     //  add music
 
