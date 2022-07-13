@@ -1,0 +1,17 @@
+{
+  "name": "dis-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alok kumar",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "node-fetch": "^2.6.7"
+  }
+}
