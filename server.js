@@ -14,6 +14,13 @@ const client = new Client({
 const fetch =require('node-fetch')
 require("dotenv").config();
 
+ // for chat with ai bot
+// const { Configuration, OpenAIApi } = require("openai-api");
+
+// const configuration = new Configuration({
+//   apiKey: process.env.OPENAI_KEY,
+// });
+
 
 client.login(process.env.BOTTOKEN);
 
@@ -32,6 +39,8 @@ const mulReply=[
     'six reply',
     'seven reply',
 ]
+
+
   
 client.on("message",messageReply)
 
@@ -41,7 +50,7 @@ async function messageReply(msg){
    if(msg.channel.id=="996692805609066496"){
        const term=msg.content.split("=");
  
-     if (term[0] === "hi") {
+     if (term[0] === "message") {
        const rep = Math.floor(Math.random() * mulReply.length);
        msg.channel.send(mulReply[rep]);
      } 
@@ -87,6 +96,19 @@ async function messageReply(msg){
 
       let memeInd = Math.floor(Math.random() * memeRes.data.children.length);
       msg.reply(memeRes.data.children[memeInd].data.url_overridden_by_dest);
+
+      // let memeUrl = `https://ronreiter-meme-generator.p.rapidapi.com/meme?top=Top%20Text&bottom=Bottom%20Text&meme=Condescending-Wonka&font_size=50&font=Impact`;
+     
+      // const memeoptions = {
+      //   method: "GET",
+      //   headers: {
+      //     "X-RapidAPI-Key": process.env.RAPID_KEY,
+      //     "X-RapidAPI-Host": "ronreiter-meme-generator.p.rapidapi.com",
+      //   },
+      // };
+      //  let memeData = await fetch(memeUrl, memeoptions);
+      //  let memeRes = await memeData.json();
+       
     }
     // motivation
     else if(term[0]==`!motivation`){
@@ -103,8 +125,71 @@ async function messageReply(msg){
      else if (term[0] == `hello bot`) {
        msg.reply(`hello friend @${msg.author.username}`);
      }
+
+     else if(term[0]==`hi`){
+      
+         msg.reply(`${msg.content} ${msg.author}`);  
+     }
+    else if(term[0]==`live-score`){
+      const crickUrl = "https://cricbuzz-cricket.p.rapidapi.com/matches/v1/recent";
+
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": process.env.RAPID_KEY,
+          "X-RapidAPI-Host": "cricbuzz-cricket.p.rapidapi.com",
+        },
+      };
+
+     const score=await fetch(crickUrl, options)
+     const scoreRes=await score.json()   
+     console.log(scoreRes.appIndex.webURL)
+     msg.reply(`https://${scoreRes.appIndex.webURL}`);
+    }
+    else if(term[0]==`play`){
+      const Playurl =
+        "https://spotify23.p.rapidapi.com/tracks/?ids=4WNcduiCmDNfmTEz7JvmLv";
+
+      const Playoptions = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":process.env.RAPID_KEY,
+          "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+        },
+      };
+
+     let playData= await fetch(Playurl, Playoptions)
+     let PlayRes = await playData.json();
+    //  console.log(PlayRes.tracks[0].preview_url)
+     msg.reply(PlayRes.tracks[0].preview_url);
+       
+    }
+    // else{
+    //   msg.reply(`sorry...!!! ${msg.author}... i'm still learning`)
+    //   return;
+    // }
   
 
    }
+  //  if (msg.channel.id == "997048677069750363") {
+  //    if ((msg.content = `play`)) {
+  //      const Playurl =
+  //        "https://spotify23.p.rapidapi.com/tracks/?ids=4WNcduiCmDNfmTEz7JvmLv";
+
+  //      const Playoptions = {
+  //        method: "GET",
+  //        headers: {
+  //          "X-RapidAPI-Key":
+  //            "e75f2ca447msh9c5e1bac0a12da5p150b0fjsn5f5f9b2643a0",
+  //          "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+  //        },
+  //      };
+
+  //      let playData = await fetch(Playurl, Playoptions);
+  //      let PlayRes = await playData.json();
+  //      console.log(PlayRes.tracks[0].preview_url);
+  //      msg.reply(PlayRes.tracks[0].uri);
+  //    }
+  //  }
   
 }
