@@ -58,7 +58,7 @@ async function messageReply(msg){
        msg.reply(jsonData.data[index].url);
      }
      // add wikipedia articals
-     else if (term[0] == `!search`) {
+     else if (term[0] == `!wiki`) {
        let wikiSearch = "meme";
        if (term.length > 1) {
          wikiSearch = term.slice(1, term.length).join(" ");
