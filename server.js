@@ -46,7 +46,7 @@ async function messageReply(msg){
        msg.channel.send(mulReply[rep]);
      } 
     //  gif
-     else if (term[0] === "#gif") {
+     else if (term[0] === "!gif") {
        let searchWord = "meme";
        if (term.length > 1) {
          searchWord = term.slice(1, term.length).join(" ");
@@ -58,7 +58,7 @@ async function messageReply(msg){
        msg.reply(jsonData.data[index].url);
      }
      // add wikipedia articals
-     else if (term[0] == `#search`) {
+     else if (term[0] == `!search`) {
        let wikiSearch = "meme";
        if (term.length > 1) {
          wikiSearch = term.slice(1, term.length).join(" ");
@@ -76,7 +76,7 @@ async function messageReply(msg){
        }
      }
     //  add meme
-    else if(term[0]==`#meme`){
+    else if(term[0]==`!meme`){
       // let searchMeme='meme'
       // if(term.length>1){
       //   searchMeme=term.slice(1,term.length).join(" ")
@@ -89,7 +89,7 @@ async function messageReply(msg){
       msg.reply(memeRes.data.children[memeInd].data.url_overridden_by_dest);
     }
     // motivation
-    else if(term[0]=`#motivation`){
+    else if(term[0]==`!motivation`){
       let motUrl = `https://type.fit/api/quotes`;
       let motData=await fetch(motUrl)
       let motRes=await motData.json()
@@ -97,12 +97,12 @@ async function messageReply(msg){
       motIndex = Math.floor(Math.random() * motRes.length);
        motText = motRes[motIndex].text;
       motAut =  motRes[motIndex].author != null ? motRes[motIndex].author : "no author";
-      msg.reply(`thougnt=(${motText}), given by=(${motAut})`)
+      msg.reply(`thougnt=(${motText})........!!!! And This message is Given By=(${motAut})`)
     }
      //  add music
-    //  else if (term[0] == `hello bot`) {
-    //    msg.reply(`hello friend @${msg.author.username}`);
-    //  }
+     else if (term[0] == `hello bot`) {
+       msg.reply(`hello friend @${msg.author.username}`);
+     }
   
 
    }
